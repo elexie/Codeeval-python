@@ -1,0 +1,43 @@
+'''
+INPUT SAMPLE:
+
+Your program should accept as its first argument a path to a filename. Each line in this file is one test case. E.g.
+
+zero;two;five;seven;eight;four
+three;seven;eight;nine;two
+
+OUTPUT SAMPLE:
+Print numbers in the following way:
+025784
+37892
+
+'''
+
+digitDictionary = {
+    'zero': 0,
+    'one': 1,
+    'two': 2,
+    'three': 3,
+    'four': 4,
+    'five': 5,
+    'six': 6,
+    'seven': 7,
+    'eight': 8,
+    'nine': 9
+}
+file = open("Practice/wordToDigit.txt", 'r')
+numberName = ''
+convertedLine = ''  # the line of number names converted to their digit representation
+
+for line in file:
+    lineList = list(line)  # convert the line to a list of characters
+    for index in range(len(line)):  # loop through the list
+        if lineList[index].isalpha(): #check if the character is a letter
+            numberName += str(
+                lineList[index].strip())  # prevent new line characters or space characters from being counted
+        else:
+            convertedLine += str(digitDictionary[numberName])
+            numberName = ""  # reset numberName to an empty string so that we can store the name of the next number in the line
+    else:
+        print(convertedLine)
+        convertedLine = '' #reset the variable for the next line in the file
